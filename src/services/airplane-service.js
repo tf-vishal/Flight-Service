@@ -63,7 +63,25 @@ async function destroyAirplane(id) {
 			);
 		}
 		throw new AppError(
-			"Someting went wrong while fetching the airplanes",
+			"Someting went wrong while deleting the airplanes",
+			StatusCodes.INTERNAL_SERVER_ERROR
+		);
+	}
+}
+
+async function updateAirplane(id, data) {
+	try {
+		const airplane = await airplaneRepository.update(id, data);
+		return airplane;
+	} catch (error) {
+		if (error.statusCode == StatusCodes.NOT_FOUND) {
+			throw new AppError(
+				"Not able to find the airplane to update",
+				error.statusCode
+			);
+		}
+		throw new AppError(
+			"Someting went wrong while fetching the airplane to update",
 			StatusCodes.INTERNAL_SERVER_ERROR
 		);
 	}
@@ -74,4 +92,5 @@ module.exports = {
 	getAirplanes,
 	getAirplane,
 	destroyAirplane,
+	updateAirplane,
 };
