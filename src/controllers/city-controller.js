@@ -16,6 +16,34 @@ async function createCity(req, res) {
 		return res.status(error.statusCode).json(errorResponse);
 	}
 }
+
+async function getCities(req, res) {
+	try {
+		const cities = await CityService.getCities();
+		successResponse.data = cities;
+		successResponse.message = "Successfully fetched all the cities";
+		return res.status(StatusCodes.OK).json(successResponse);
+	} catch (error) {
+		errorResponse.error = error;
+		errorResponse.message = "Something went wrong while fetching cities";
+		return res.status(error.statusCode).json(errorResponse);
+	}
+}
+
+async function getCity(req, res) {
+	try {
+		const city = await CityService.getCity(req.params.id);
+		successResponse.data = city;
+		successResponse.message = "Successfully fetched the city";
+		res.status(StatusCodes.OK).json(successResponse);
+	} catch (error) {
+		errorResponse.error = error;
+		errorResponse.message = "Something went wrong while fetching the city";
+		return res.status(error.statusCode).json(errorResponse);
+	}
+}
 module.exports = {
 	createCity,
+	getCities,
+	getCity,
 };

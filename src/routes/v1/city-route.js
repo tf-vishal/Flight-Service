@@ -12,4 +12,8 @@ router.post(
 	CityController.createCity
 );
 
+router.get("/", CityController.getCities);
+
+router.get("/:id", CityController.getCity);
+
 module.exports = router;
