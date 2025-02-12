@@ -42,8 +42,23 @@ async function getCity(req, res) {
 		return res.status(error.statusCode).json(errorResponse);
 	}
 }
+
+async function destroyCity(req, res) {
+	try {
+		const city = await CityService.destroyCity(req.params.id);
+		successResponse.data = city;
+		successResponse.message = "Successfully destroyed the city";
+		res.status(StatusCodes.OK).json(successResponse);
+	} catch (error) {
+		errorResponse.error = error;
+		errorResponse.message = "Something went wrong while destroying the city";
+		return res.status(error.statusCode).json(errorResponse);
+	}
+}
+
 module.exports = {
 	createCity,
 	getCities,
 	getCity,
+	destroyCity,
 };

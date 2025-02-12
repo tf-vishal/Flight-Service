@@ -52,8 +52,27 @@ async function getCity(id) {
 	}
 }
 
+async function destroyCity(id) {
+	try {
+		const city = await cityRepository.destroy(id);
+		return city;
+	} catch (error) {
+		if (error.statusCode == StatusCodes.NOT_FOUND) {
+			throw new AppError(
+				"Not able to find the city to destroy",
+				error.statusCode
+			);
+		}
+		throw new AppError(
+			"Someting went wrong while destroying the city",
+			StatusCodes.INTERNAL_SERVER_ERROR
+		);
+	}
+}
+
 module.exports = {
 	createCity,
 	getCities,
 	getCity,
+	destroyCity,
 };
