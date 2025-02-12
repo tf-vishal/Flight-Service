@@ -70,9 +70,28 @@ async function destroyCity(id) {
 	}
 }
 
+async function updateCity(id, data) {
+	try {
+		const city = await cityRepository.update(id, data);
+		return city;
+	} catch (error) {
+		if (error.statusCode == StatusCodes.NOT_FOUND) {
+			throw new AppError(
+				"Not able to find the city to update",
+				error.statusCode
+			);
+		}
+		throw new AppError(
+			"Someting went wrong while updating the city",
+			StatusCodes.INTERNAL_SERVER_ERROR
+		);
+	}
+}
+
 module.exports = {
 	createCity,
 	getCities,
 	getCity,
 	destroyCity,
+	updateCity,
 };

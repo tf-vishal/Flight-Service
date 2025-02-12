@@ -2,13 +2,13 @@ const express = require("express");
 
 const { AirplaneController } = require("../../controllers");
 
-const { airplaneMiddlewares } = require("../../middlewares");
+const { AirplaneMiddlewares } = require("../../middlewares");
 
 const router = express.Router();
 
 router.post(
 	"/",
-	airplaneMiddlewares.validateCreateRequest,
+	AirplaneMiddlewares.validateCreateRequest,
 	AirplaneController.createAirplane
 );
 router.get("/", AirplaneController.getAirplanes);
@@ -19,7 +19,7 @@ router.delete("/:id", AirplaneController.destroyAirplane);
 
 router.patch(
 	"/:id",
-	airplaneMiddlewares.validateCreateRequest,
+	AirplaneMiddlewares.validateCreateRequest,
 	AirplaneController.updateAirplane
 );
 
