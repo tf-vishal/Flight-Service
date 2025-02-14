@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 
 const { CityRepository } = require("../repositories");
+
 const AppError = require("../utils/errors/app-error");
 
 const cityRepository = new CityRepository();
@@ -10,7 +11,10 @@ async function createCity(data) {
 		const city = await cityRepository.create(data);
 		return city;
 	} catch (error) {
-		if (error.name == "SequelizeValidationError") {
+		if (
+			error.name == "SequelizeValidationError" ||
+			error.name == "SequelizeUniqueConstraintError"
+		) {
 			let explanation = [];
 			error.errors.foreach((err) => {
 				explanation.push(err.message);
@@ -80,6 +84,16 @@ async function updateCity(id, data) {
 				"Not able to find the city to update",
 				error.statusCode
 			);
+		}
+		if (
+			error.name == "SequelizeValidationError" ||
+			error.name == "SequelizeUniqueConstraintError"
+		) {
+			let explanation = [];
+			error.errors.foreach((err) => {
+				explanation.push(err.message);
+			});
+			throw new AppError(explanation, StatusCodes.BAD_REQUEST);
 		}
 		throw new AppError(
 			"Someting went wrong while updating the city",
