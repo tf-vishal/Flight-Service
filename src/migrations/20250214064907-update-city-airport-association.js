@@ -4,7 +4,7 @@
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.addConstraint("Airports", {
-			type: "foreign key",
+			type: "FOREIGN KEY",
 			name: "city_fkey_constraint",
 			fields: ["cityID"],
 			references: {
@@ -12,7 +12,6 @@ module.exports = {
 				field: "id",
 			},
 			onDelete: "CASCADE",
-			onUpdate: "CASCADE",
 		});
 	},
 

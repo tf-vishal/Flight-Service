@@ -26,11 +26,6 @@ module.exports = {
 			cityID: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: {
-					// User belongsTo Company 1:1
-					model: "Cities",
-					key: "id",
-				},
 			},
 			createdAt: {
 				allowNull: false,
