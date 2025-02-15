@@ -45,10 +45,12 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			departureTime: {
 				type: DataTypes.DATE,
+				defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
 				allowNull: false,
 			},
 			arrivalTime: {
 				type: DataTypes.DATE,
+				defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
 				allowNull: false,
 			},
 			price: {
