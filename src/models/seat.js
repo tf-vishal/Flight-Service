@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Seat.init(
 		{
-			aiplaneId: {
+			airplaneId: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},

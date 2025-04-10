@@ -12,7 +12,7 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			aiplaneId: {
+			airplaneId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 				references: {
