@@ -1,5 +1,5 @@
 const CrudRepository = require("./crud-repository");
-const { Flight, Airport } = require("../models");
+const { Flight, Airport, Airplane } = require("../models");
 
 class FlightRepository extends CrudRepository {
 	constructor() {
@@ -13,13 +13,18 @@ class FlightRepository extends CrudRepository {
 			include: [
 				{
 					model: Airport,
-					as: "departureAirport", // Specify the alias for the departure airport
+					as: "departure_airport", // Specify the alias for the departure airport
 					attributes: ["id", "name", "code"],
 				},
 				{
 					model: Airport,
-					as: "arrivalAirport", // Specify the alias for the arrival airport
+					as: "arrival_airport", // Specify the alias for the arrival airport
 					attributes: ["id", "name", "code"],
+				},
+				{
+					model: Airplane,
+					as: "airplane_details",
+					required: true,
 				},
 			],
 		});
