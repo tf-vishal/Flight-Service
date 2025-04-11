@@ -95,7 +95,21 @@ function validateDepartureArrivalTime(req, res, next) {
 	next();
 }
 
+function validateUpdateSeatRequest(req, res, next) {
+	if (!req.body.seats) {
+		errorResponse.message = "Something went wrong while updating flight";
+		errorResponse.error = new AppError(
+			["Seats information is not provided"],
+			StatusCodes.BAD_REQUEST
+		);
+
+		return res.status(StatusCodes.BAD_REQUEST).json(errorResponse);
+	}
+	next();
+}
+
 module.exports = {
 	validateCreateRequest,
 	validateDepartureArrivalTime,
+	validateUpdateSeatRequest,
 };
