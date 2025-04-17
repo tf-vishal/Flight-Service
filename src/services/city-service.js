@@ -16,7 +16,7 @@ async function createCity(data) {
 			error.name == "SequelizeUniqueConstraintError"
 		) {
 			let explanation = [];
-			error.errors.foreach((err) => {
+			error.errors.forEach((err) => {
 				explanation.push(err.message);
 			});
 			throw new AppError(explanation, StatusCodes.BAD_REQUEST);
@@ -90,7 +90,7 @@ async function updateCity(id, data) {
 			error.name == "SequelizeUniqueConstraintError"
 		) {
 			let explanation = [];
-			error.errors.foreach((err) => {
+			error.errors.forEach((err) => {
 				explanation.push(err.message);
 			});
 			throw new AppError(explanation, StatusCodes.BAD_REQUEST);
