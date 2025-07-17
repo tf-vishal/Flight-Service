@@ -48,3 +48,20 @@ npm install
 ```
 npm run dev
 ```
+
+
+
+# Docker File 
+
+- To build docker image, run one of these commands!!!
+
+```
+docker build -t flight-service .
+docker compose up
+```
+
+OR
+
+```
+docker compose up build
+```
